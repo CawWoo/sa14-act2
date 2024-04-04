@@ -1,0 +1,55 @@
+#Craft a dashboard displaying real-time weather conditions and forecasts.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <!-- Libraries -->
+    <!-- API key-->
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Weather Dashboard</h1>
+    <form id="weatherForm">
+        <label for="cityInput">Enter City Name:</label>
+        <input type="text" id="cityInput" placeholder="e.g., Tokyo">
+        <button type="submit">Get Weather</button>
+    </form>
+    <div id="weatherInfo">
+        <p>Current Time: <span id="currentTime"></span></p>
+        <p>Temperature: <span id="currentTemp"></span></p>
+        <p>Weather Condition: <img id="weatherIcon" alt="Weather Icon"></p>
+        <p>Humidity: <span id="humidity"></span></p>
+       
+    </div>
+    <script>
+        const form = document.getElementById('weatherForm');
+        const cityInput = document.getElementById('cityInput');
+        const currentTime = document.getElementById('currentTime');
+        const currentTemp = document.getElementById('currentTemp');
+        const weatherIcon = document.getElementById('weatherIcon');
+        const humidity = document.getElementById('humidity');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const city = cityInput.value;
+            try {
+                const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${city}`);
+                const data = await response.json();
+                // Update weather data elements
+                currentTime.textContent = data.location.localtime;
+                currentTemp.textContent = `${data.current.temp_c}°C`; // or data.current.temp_f + '°F'
+                weatherIcon.src = data.current.condition.icon;
+                humidity.textContent = `${data.current.humidity}%`;
+               
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        });
+    </script>
+</body>
+</html>
