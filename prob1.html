@@ -102,7 +102,7 @@
                 // Update weather data elements
                 currentTime.textContent = data.location.localtime;
                 currentTemp.textContent = `${data.current.temp_f}°F`; // or data.current.temp_f + '°F'
-                weatherIcon.src = data.current.condition.icon;
+                weatherIcon.src = "http:" + data.current.condition.icon;
                 humidity.textContent = `${data.current.humidity}%`;
 
                 // Update 5-day forecast
@@ -111,7 +111,7 @@
                     const date = day.date;
                     const maxTemp = day.day.maxtemp_f;
                     const minTemp = day.day.mintemp_f;
-                    const conditionIcon = day.day.condition.icon;
+                    const weatherIcon = "http:" + day.day.condition.icon;
 
                     const forecastItem = document.createElement('div');
                     forecastItem.classList.add('forecast-item');
@@ -119,7 +119,7 @@
                         <p>Date: ${date}</p>
                         <p>Max Temp: ${maxTemp}°F</p>
                         <p>Min Temp: ${minTemp}°F</p>
-                        <img src="${conditionIcon}" alt="Weather Icon">
+                        <img src="${weatherIcon}" alt="Weather Icon">
                     `;
                     forecastContainer.appendChild(forecastItem);
                 });
