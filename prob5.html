@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .movable-div {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.5s ease; /*  transition */
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); 
+            bottom: 20px; 
+        }
+
+
+        button:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+    <div class="movable-div"></div>
+    <button onclick="moveDiv()">Move</button>
+
+    <script>
+        // Get div element
+        const divElement = document.querySelector('.movable-div');
+
+        // Initial position 
+        let isMoved = false;
+
+        function moveDiv() {
+            if (isMoved) {
+                // Return to center
+                divElement.style.transform = 'translate(-50%, -50%)';
+            } else {
+                // Move to the right
+                divElement.style.transform = 'translate(200px, -50%)';
+            }
+            isMoved = !isMoved;
+        }
+    </script>
+</body>
+</html>
+
